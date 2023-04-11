@@ -1,17 +1,29 @@
 const SQUARE_WIDTH = 44;
+const DEFAULT_NUM_SQUARES_PER_SIDE = 16;
+const gridDivId = '#grid';
 
-// Create a grid of 16x16 squares.
-const grid = document.querySelector('#grid');
-
-for (let i = 0; i < 256; i++) {
-  const square = document.createElement('div');
-  square.classList.toggle('square');
-  grid.appendChild(square);
+function getGrid() {
+  return document.querySelector(gridDivId);
 }
 
-// Add initial style and event listeners to all squares.
-const squares = document.querySelectorAll('.square');
-squares.forEach(square => setupSquare(square));
+function clearGrid() {
+  getGrid().replaceChildren();
+}
+
+// Create a grid of 16x16 squares.
+function drawGrid(numSquaresPerSide) {
+  // Correctly size the grid to make it a square.
+  const grid = getGrid();
+  const totalNumSquares = numSquaresPerSide ** 2;
+  grid.style.width = `${numSquaresPerSide * SQUARE_WIDTH}px`;
+
+  for (let i = 0; i < totalNumSquares; i++) {
+    const square = document.createElement('div');
+    square.classList.toggle('square'); // Initial style
+    setupSquare(square); // Event listeners and toggled style
+    grid.appendChild(square);
+  }
+}
 
 function setupSquare(square) {
   addMouseEventListeners(square);
@@ -27,13 +39,14 @@ function toggleMouseoverStyle(square) {
 
 // Prompt user for new grid size, then create the grid.
 const btn = document.querySelector('#new-grid-btn');
-
 btn.addEventListener('click', createNewGrid);
 
 function createNewGrid() {
-  let numSquares = prompt("Enter number of squares per side");
-  numSquares = (numSquares > 100) ? 100 : numSquares;
-
-  const gridWidth = SQUARE_WIDTH * numSquares;
-  drawGrid(gridWidth);
+  let numSquaresPerSide = prompt("Enter number of squares per side");
+  numSquaresPerSide = (numSquaresPerSide > 100) ? 100 : numSquaresPerSide;
+  clearGrid();
+  drawGrid(numSquaresPerSide);
 }
+
+// Init
+drawGrid(DEFAULT_NUM_SQUARES_PER_SIDE);
