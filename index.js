@@ -35,15 +35,18 @@ function createNewGrid() {
 // Square functions
 function setupSquare(square) {
   square.classList.toggle('square'); // Initial style
-  addMouseEventListeners(square);
+  addMouseoverListener(square);
 }
 
-function addMouseEventListeners(square) {
-  square.addEventListener('mouseover', () => toggleMouseoverStyle(square));
+function addMouseoverListener(square) {
+  square.addEventListener('mouseover', () => colorSquare(square));
 }
 
-function toggleMouseoverStyle(square) {
-  square.classList.toggle('mouseover-square');
+function colorSquare(square) {
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  square.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
 }
 
 // Prompt user for new grid size, then create the grid.
