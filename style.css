@@ -1,7 +1,35 @@
+* {
+  font-family: Rockwell;
+}
+
 #grid {
   display: flex;
-  width: 640px;
+  width: 704px;
   flex-wrap: wrap;
 }
 
+#main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
 
+.square {
+  border: 2px solid #BADBB2;
+  width: 40px;
+  height: 40px;
+}
+
+.mouseover-square {
+  background-color: #BADBB2;
+}
+
+#new-grid-btn {
+  font-size: 24px;
+  padding: 20px 30px 10px 30px;
+  border: none;
+  margin: none;
+  background-color: #D56671;
+  border-radius: 8px;
+}
